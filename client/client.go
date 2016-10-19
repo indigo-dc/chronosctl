@@ -6,7 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/spf13/viper"
-	"github.com/thomas-maurice/chronosctl/types"
+	"github.com/indigo-dc/chronosctl/types"
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"

@@ -27,6 +27,7 @@ type ChronosJob struct {
 	Arguments            []string                 `json:"arguments"`
 	RunAsUser            string                   `json:"runAsUser"`
 	Container            *ChronosContainerOptions `json:"container,omitempty"`
+	Uris                 []string                 `json:"uris,omitempty"`
 }
 
 type EnvironmentVariable struct {
@@ -50,6 +51,8 @@ type NewChronosJob struct {
 	EnvironmentVariables *[]EnvironmentVariable   `json:"environmentVariables,omitempty"`
 	Constraints          []string                 `json:"constraints,omitempty"`
 	Container            *ChronosContainerOptions `json:"container,omitempty"`
+	Uris                 *[]string                `json:"uris,omitempty"`
+	Retries              uint64                   `json:"retries,omitempty"`
 }
 
 type ChronosJobStatus struct {

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/thomas-maurice/chronosctl/cmd"
-	"github.com/thomas-maurice/chronosctl/config"
+	"github.com/indigo-dc/chronosctl/cmd"
+	"github.com/indigo-dc/chronosctl/config"
 	"log"
 )
 

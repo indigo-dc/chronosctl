@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"github.com/Sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"github.com/thomas-maurice/chronosctl/client"
-	"github.com/thomas-maurice/chronosctl/types"
+	"github.com/indigo-dc/chronosctl/client"
+	"github.com/indigo-dc/chronosctl/types"
 	"strings"
 )
 
@@ -27,6 +27,8 @@ var (
 	Parents            string
 	Async              bool
 	Environment        string
+	Uris               string
+	Retries            uint64
 )
 
 var JobCmd = &cobra.Command{
@@ -193,6 +195,14 @@ var JobCreateCmd = &cobra.Command{
 			deps = nil
 		}
 
+		var uris *[]string
+		uarr := strings.Split(Uris, ",")
+		if Uris != "" {
+			uris = &uarr
+		} else {
+			uris = nil
+		}
+
 		job := types.NewChronosJob{
 			CPUs:                 CPUs,
 			Disk:                 Disk,
@@ -207,6 +217,8 @@ var JobCreateCmd = &cobra.Command{
 			Parents:              deps,
 			Name:                 args[0],
 			EnvironmentVariables: environment,
+			Uris:                 uris,
+			Retries:              Retries,
 		}
 
 		if ContainerType != "" {
@@ -262,5 +274,7 @@ func InitJobCmd() {
 	JobCreateCmd.Flags().StringVarP(&ContainerImage, "container-image", "", "", "Container image to use")
 	JobCreateCmd.Flags().StringVarP(&ContainerNetwork, "container-network", "", "BRIDGE", "Container network mode to use")
 	JobCreateCmd.Flags().BoolVarP(&ContainerForcePull, "container-force-pull", "", false, "Force pull the image")
+	JobCreateCmd.Flags().StringVarP(&Uris, "uris", "", "", "URIs to be fetched")
+	JobCreateCmd.Flags().Uint64VarP(&Retries, "retries", "", 2, "Number of retries to attempt")
 
 }
